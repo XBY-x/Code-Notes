@@ -39,7 +39,7 @@ void insertion_sort(int arr[], int len) {
     }
 }
 ```
-## Binary insertion sort (折半插入排序)
+### Binary insertion sort (折半插入排序)
 基本概念
 折半插入排序（binary insertion sort）是对插入排序算法的一种改进，由于排序算法过程中，就是不断的依次将元素插入前面已排好序的序列中。由于前半部分为已排好序的数列，这样我们不 用按顺序依次寻找插入点，可以采用折半查找的方法来加快寻找插入点的速度。
 https://developer.aliyun.com/article/31759
