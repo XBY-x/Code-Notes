@@ -46,6 +46,69 @@ https://developer.aliyun.com/article/31759
 
 
 ### Selection sort
+#### 步骤
+首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。
+再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
+重复第二步，直到所有元素均排序完毕。
+
+#### 例
+```
+input_arr is:
+2 7 4 5 1 2 6 7 10 3
+[0] 1 7 4 5 2 2 6 7 10 3
+[1] 1 2 4 5 7 2 6 7 10 3
+[2] 1 2 2 5 7 4 6 7 10 3
+[3] 1 2 2 3 7 4 6 7 10 5
+[4] 1 2 2 3 4 7 6 7 10 5
+[5] 1 2 2 3 4 5 6 7 10 7
+[6] 1 2 2 3 4 5 6 7 10 7
+[7] 1 2 2 3 4 5 6 7 10 7
+[8] 1 2 2 3 4 5 6 7 7 10
+```
+
+#### C语言实现
+```c
+void selection_sort(int arr[], int len)
+{
+    int temp = 0;
+    int min_index = 0;
+
+    // 这里 i < len-1 是因为内部循环是 j=i+1 开始的。
+    // 最后循环到 i等于倒数第2个元素 的时候，已经让 -1 和 -2 元素做了比较，已经交换过，是有序的；
+    // 所以不需要再让 i 等于最后一个元素下标了
+    for (int i = 0; i < len - 1; i++)
+    {
+        min_index = i;
+        for (int j = i + 1; j < len; j++)
+        {
+            if (arr[j] < arr[min_index])
+            {
+                min_index = j;
+            }
+        }
+        if (min_index != i)
+        {
+            temp = arr[i];
+            arr[i] = arr[min_index];
+            arr[min_index] = temp;
+        }
+    }
+}
+```
+
+#### python3
+``` python
+def selection_sort(arr):
+    for i in range(len(arr)-1):
+        min_index = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        if i != min_index:
+            arr[i], arr[min_index] = arr[min_index], arr[i]
+    return arr
+```
+
 
 ### Merge sort
 ### Heapsort
