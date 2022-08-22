@@ -1,4 +1,90 @@
 #### 深度优先搜索 - Depth-First-Search - DFS
+递归
+例：
+对于如下二叉树：
+```mermaid
+graph TB
+  A((1))---B((10))
+  A---C((7))
+  B---D((5))
+  C---E((8))
+  C---F((35))
+```
+[1]
+```mermaid
+graph TB
+  A{1}---B((10))
+  style A fill:#f9f,stroke:#333,stroke-width:4px
+  A---C((7))
+  B---D((5))
+  C---E((8))
+  C---F((35))
+```
+[2]
+```mermaid
+graph TB
+  A((1))---B{10}
+  style B fill:#f9f,stroke:#333,stroke-width:4px
+  A---C((7))
+  B---D((5))
+  C---E((8))
+  C---F((35))
+```
+[3]
+```mermaid
+graph TB
+  A((1))---B((10))
+  A---C((7))
+  B---D{5}
+  style D fill:#f9f,stroke:#333,stroke-width:4px
+  C---E((8))
+  C---F((35))
+```
+[4]
+```mermaid
+graph TB
+  A((1))---B((10))
+  A---C{7}
+  B---D((5))
+  D-.callback.->B
+  B-.callback.->A
+  style C fill:#f9f,stroke:#333,stroke-width:4px
+  C---E((8))
+  C---F((35))
+```
+[5]
+```mermaid
+graph TB
+  A((1))---B((10))
+  A---C((7))
+  B---D((5))
+  C---E{8}
+  C---F((35))
+  style E fill:#f9f,stroke:#333,stroke-width:4px
+```
+[6]
+```mermaid
+graph TB
+  A((1))---B((10))
+  A---C((7))
+  B---D((5))
+  C---E((8))
+  C---F{35}
+  style F fill:#f9f,stroke:#333,stroke-width:4px
+  E-.callback.->C
+```
+[7]
+```mermaid
+graph TB
+  A((1))---B((10))
+  A---C((7))
+  B---D((5))
+  C---E((8))
+  C---F((35))
+  F-.callback.->C
+  C-.callback.->A
+```
+
 
 
 ### 广度优先搜索 - Breadth-First Search - BFS
