@@ -45,7 +45,7 @@ void insertion_sort(int arr[], int len) {
 https://developer.aliyun.com/article/31759
 
 
-### Selection sort
+### Selection sort (选择排序)
 #### 步骤
 首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。
 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
@@ -112,10 +112,14 @@ def selection_sort(arr):
 
 ### Merge sort
 ### Heapsort
-### Quicksort
+
+### Quicksort (快速排序)
+#### 步骤
+
 ### Shellsort
 
-### Bubble sort
+
+### Bubble sort (冒泡排序)
 #### 步骤
 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，**最后的元素会是最大的数**。
