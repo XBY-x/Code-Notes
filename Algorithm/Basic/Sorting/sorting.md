@@ -114,12 +114,123 @@ def selection_sort(arr):
 ### Heap sort (堆排序)
 #### tips:
 - 堆：
+  
   堆是 完全二叉树 结构
 - 完全二叉树
+  
   在一颗二叉树中，若除最后一层外的其余层都是满的，并且最后一层要么是满的，要么在右边缺少连续若干节点，
+  
   则此二叉树为完全二叉树（Complete Binary Tree）
+- 堆节点下标的计算
+  
+  对于 节点 i
+    - 左子节点 2i + 1
+    - 左子节点 2i + 2
+    - 父节点  (i-1) / 2
+- 大顶堆：每个结点的值都大于或等于其左右孩子结点的值
+
+  小顶堆：每个结点的值都小于或等于其左右孩子结点的值
+
+- 一般升序排序采用大顶堆
+  
+  降序排序采用小顶堆
 
 #### 步骤
+先将无需序列构造成一个堆结构，然后逐步构建 大顶堆/小顶堆
+从最后一个父节点开始倒着排序，直到本趟排序完成
+将堆顶的元素(是 最大/最小 元素) 与 序列最末尾元素交换
+继续对 去掉有序的最后一个元素的序列进行排序，重复此过程，直到排序完成。
+
+#### 例
+(画二叉树看更清晰)
+
+#### C 实现 (升序排序)
+```c
+void swap(int* a, int* b) {
+    int temp = *b;
+    *b = *a;
+    *a = temp;
+}
+
+void max_heapify(int arr[], int start, int end) {
+    int dad = start;
+    int son = dad * 2 + 1;  // 左子节点
+    while (son <= end) {
+        if (son + 1 <= end && arr[son] < arr[son + 1]) // 找到两个子节点中较大的那个 
+            son++;
+        if (arr[dad] > arr[son]) //父 > 子，调整完毕，退出
+            return;
+        else { // 交换父子内容后，继续处理子节点和孙节点的关系
+            swap(&arr[dad], &arr[son]);
+            dad = son;
+            son = dad * 2 + 1;
+        }
+    }
+}
+
+void heap_sort(int arr[], int len) {
+    /* 计算最后一个父节点：
+    *    已知数组长度(节点个数) 为 len,
+    *    那么最后一个节点的下标就是 (len - 1),
+    *    因为堆是完全二叉树结构，所以最后一个节点的父节点，就是这个二叉树中最后一个有子节点的节点(最后一个父节点)，
+    *    带入 (i-1) / 2 计算 (len - 1)的父节点, 得到父节点下标为 (len - 2) / 2  也就是 len / 2 - 1
+    */
+    // 从最后的父节点开始调整
+    for (int i = len / 2 - 1; i >= 0; i--) 
+        max_heapify(arr, i, len - 1);
+
+    // 经过上面的处理， 此时堆的根节点[第0个]是序列的最大值
+
+    for (int i = len - 1; i > 0; i--) {
+        // 交换 根节点([0]) 和 未排序序列的最后一个元素，交换后 原未排序序列的最后一个元素 为 原未排序序列的最大值
+        swap(&arr[0], &arr[i]);
+        // 继续排 原未排序序列-1 的序列， 此时 前半部分为新的未排序序列，是原始序列的最大n个值的有序序列
+        max_heapify(arr, 0, i - 1);
+    }
+}
+```
+
+#### python3 实现 (升序排序)
+```python
+def swap(arr, a, b):
+    arr[a], arr[b] = arr[b], arr[a]
+
+
+def max_heapify(arr, start, end):
+    dad = start
+    son = dad * 2 + 1  # 左子节点
+    while son <= end:
+        if son+1 <= end and arr[son] < arr[son+1]:
+            son += 1  # 右子节点大于左子节点， 所以让son变成右子节点
+        if arr[dad] >= arr[son]:  # 父节点 大于 子节点，说明本次调节完成，return
+            return
+        else:
+            swap(arr, dad, son)
+            dad = son  # 让子节点成为新的父节点，继续调节子树的节点
+            son = dad * 2 + 1
+
+
+def heap_sort(arr):
+    arr_len = len(arr)
+    # 先从 完全二叉树中 的 最后一个 父节点 开始，倒着将每个父节点都处理一遍
+    # 最后一个父节点，也就是 树 的 最后一个节点的父节点, 也就是下标 len(arr)-1的节点的父节点
+    # 所以最后一个父节点的下标为： ((len(arr)-1) - 1) // 2 也就是 (len(arr) // 2 - 1)
+    for i in range(arr_len // 2 - 1, -1, -1):
+        max_heapify(arr, i, arr_len-1)
+
+    for i in range(arr_len - 1, 0, -1):
+        swap(arr, 0, i)
+        max_heapify(arr, 0, i - 1)
+
+
+input_arr = [7, 2, 9, 7, 3, 1, 5, 6, 1, 0]
+heap_sort(input_arr)
+print(input_arr)
+```
+
+
+
+
 
 
 ### Quick sort (快速排序)
