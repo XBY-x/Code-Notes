@@ -111,11 +111,18 @@ def selection_sort(arr):
 
 
 ### Merge sort
-### Heapsort
+### Heap sort (堆排序)
+#### tips:
+- 堆：
+  堆是 完全二叉树 结构
+- 完全二叉树
+  在一颗二叉树中，若除最后一层外的其余层都是满的，并且最后一层要么是满的，要么在右边缺少连续若干节点，
+  则此二叉树为完全二叉树（Complete Binary Tree）
 
-### Quicksort (快速排序)
 #### 步骤
 
+
+### Quick sort (快速排序)
 ### Shellsort
 
 
