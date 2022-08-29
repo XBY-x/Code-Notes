@@ -247,8 +247,6 @@ def quick_sort(arr, low, high):
     if low >= high:
         return
     pivot = paritition(arr, low, high)
-    print("low ", low, " high ", high, "pivot", pivot)
-    print(arr)
     quick_sort(arr, low, pivot-1)
     quick_sort(arr, pivot+1, high)
 
@@ -267,6 +265,34 @@ def paritition(arr, low, high):
 
 a = [3,2,3,1,2,4,5,5,6]
 quick_sort(a, 0, len(a)-1)
+```
+
+#### C
+```c
+int Paritition(int A[], int low, int high) {
+    int pivot = A[low];
+    while (low < high) {
+        while (low < high && A[high] >= pivot) {
+            high--;
+        }
+        A[low] = A[high];
+        while (low < high && A[low] <= pivot) {
+            low++;
+        }
+        A[high] = A[low];
+    }
+    A[low] = pivot;
+    return low;
+}
+
+void QuickSort(int A[], int low, int high)
+{
+    if (low < high) {
+        int pivot = Paritition(A, low, high);
+        QuickSort(A, low, pivot - 1);
+        QuickSort(A, pivot + 1, high);
+    }
+}
 ```
 
 ### Shellsort
