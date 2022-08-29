@@ -234,6 +234,41 @@ print(input_arr)
 
 
 ### Quick sort (快速排序)
+#### 步骤
+先选择数据中的某一个元素为中心点(pivot);
+
+把 比pivot小的值 放到 pivot 左边， 把 比pivot大的值 放到 pivot 右边； (这一过程被称为分割/分区 (partition). 分区结束后，pivot现在所在的位置就是排序结束后的最终位置。)
+
+分别对 pivot 的 左边 和 右边 两个未排序序列进行上面的操作， 直到 pivot 左 右 都只有1个元素。
+
+#### python3
+```python
+def quick_sort(arr, low, high):
+    if low >= high:
+        return
+    pivot = paritition(arr, low, high)
+    print("low ", low, " high ", high, "pivot", pivot)
+    print(arr)
+    quick_sort(arr, low, pivot-1)
+    quick_sort(arr, pivot+1, high)
+
+
+def paritition(arr, low, high):
+    pivot = arr[low]
+    while low < high:
+        while low < high and arr[high] > pivot:
+            high -= 1
+        arr[low] = arr[high]
+        while low < high and arr[low] <= pivot:
+            low += 1
+        arr[high] = arr[low]
+    arr[low] = pivot
+    return low
+
+a = [3,2,3,1,2,4,5,5,6]
+quick_sort(a, 0, len(a)-1)
+```
+
 ### Shellsort
 
 
