@@ -110,7 +110,47 @@ def selection_sort(arr):
 ```
 
 
-### Merge sort
+### Merge sort (归并排序)
+#### 步骤
+![v2-a29c0dd0186d1f8cef3c5ebdedf3e5a3_b](https://user-images.githubusercontent.com/57653726/187385874-c22707b9-4d26-468e-b0b6-66bd6348fb15.gif)
+
+
+```
+# 归并排序中的思路
+MergeSort(arr[], l,  r)
+If r > l
+     1. 找到数组中的中间点，把数组分为两部分
+             middle m = (l+r)/2
+     2. 对数组的左部分调用MergeSort 函数  
+             Call mergeSort(arr, l, m)
+     3. 对数组的右部分调用MergeSort 函数 
+             Call mergeSort(arr, m+1, r)
+     4. 合并2,3中的两部分
+             Call merge(arr, l, m, r)
+```
+
+#### python3
+```python
+def merge_arr(a, b):
+    res = []
+    i, j = 0, 0
+    while i < len(a) and j < len(b):
+        if a[i] <= b[j]:
+            res.append(a[i])
+            i += 1
+        else:
+            res.append(b[j])
+            j += 1
+    return res
+
+def merge_sort(arr):
+    arr_len = len(arr)
+    if arr_len <= 1:
+        return arr
+    mid = arr_len >> 1
+    return merge_arr(merge_sort(arr[:mid]), merge_sort(arr[mid:]))
+```
+
 ### Heap sort (堆排序)
 #### tips:
 - 堆：
