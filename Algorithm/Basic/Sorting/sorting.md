@@ -296,6 +296,27 @@ void QuickSort(int A[], int low, int high)
 ```
 
 ### Shellsort
+#### 步骤
+一般选 初始步长 gap = length >> 1  (也就是 数据长 对 2 取整)
+
+![image](https://user-images.githubusercontent.com/57653726/187371994-afa4217d-2339-4477-b470-926e6de032ff.png)
+
+#### python3
+```python
+def shell_sort(arr):
+    arr_len = len(arr)
+    gap = arr_len >> 1
+    while gap > 0:
+        for i in range(gap, arr_len):
+            temp = arr[i]
+
+            j = i - gap
+            while j >= 0 and arr[j] > temp:
+                arr[j + gap] = arr[j]
+                j -= gap
+            arr[j + gap] = temp
+        gap >>= 1
+```
 
 
 ### Bubble sort (冒泡排序)
