@@ -19,7 +19,27 @@ class SinglyLinkedList:
         else:
             return False
 
-    def append_node(self, node):
+    def get_by_index(self, index: int) -> int:
+        if index >= self.length:
+            return -1
+            # raise Exception("Index out of range")
+        cur_node = self.head
+        for i in range(index):
+            cur_node = cur_node.next
+        return cur_node.val
+
+    def add_at_head(self, val: int) -> None:
+        if self.is_empty():
+            self.head = SinglyNode(val)
+            self.length += 1
+        else:
+            node = SinglyNode(val)
+            node.next = self.head
+            self.head = node
+            self.length += 1
+
+    def append_node(self, val: int) -> None:
+        node = SinglyNode(val)
         if self.is_empty():
             self.head = node
             self.length += 1
@@ -30,47 +50,41 @@ class SinglyLinkedList:
             cur_node.next = node
             self.length += 1
 
-    def insert_node(self, node, index):
+    def add_at_index(self, index: int, val: int) -> None:
         if index > self.length:
-            raise Exception("Index out of range")
-
+            return -1
+            # raise Exception("Index out of range")
+        node = SinglyNode(val)
         if index == 0:
             node.next = self.head
             self.head = node
-            self.length += 1
-            return
-
-        pre_node = self.head
-        for i in range(index-1):
-            pre_node = pre_node.next
-        cur_node = pre_node.next
-        pre_node.next = node
-        node.next = cur_node
+        else:
+            pre_node = self.head
+            for i in range(index - 1):
+                pre_node = pre_node.next
+            node.next = pre_node.next
+            pre_node.next = node
         self.length += 1
 
-    def delete_node(self, index):
+    def delete_at_index(self, index: int) -> None:
         if index > (self.length-1):
-            raise Exception("Index out of range")
-
+            return -1
+            # raise Exception("Index out of range")
         if index == 0:
             self.head = self.head.next
-            self.length -= 1
-            return
-
-        pre_node = self.head
-        for i in range(index-1):
-            pre_node = pre_node.next
-        pre_node.next = pre_node.next.next
+        else:
+            pre_node = self.head
+            for i in range(index - 1):
+                pre_node = pre_node.next
+            pre_node.next = pre_node.next.next
         self.length -= 1
 
     def modify_node(self, index, val):
         if index > (self.length-1):
             raise Exception("Index out of range")
-
         if index == 0:
             self.head.val = val
             return
-
         cur_node = self.head
         for i in range(index):
             cur_node = cur_node.next
@@ -88,7 +102,6 @@ class SinglyLinkedList:
                 return
             cur_node = cur_node.next
             index += 1
-
         print("Not found node ", val)
 
     def print_list(self):
